@@ -23,6 +23,7 @@ def asdf(func, title='', back=True):
         html = '''<html>
 <head>
 <title>%s</title>
+<link rel="icon" href="/favicon.ico">
 </head>
 <body>
 <h1>%s</h1>
