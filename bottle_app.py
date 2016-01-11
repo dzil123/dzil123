@@ -1,7 +1,10 @@
 from bottle import *
 import beaker.middleware
+import os
 
 from web_app import *
+
+os.chdir('/home/dzil123/mysite') # for static files
 
 session_opts = {
     'session.type': 'file',
@@ -13,7 +16,23 @@ session_opts = {
 def setup_request():
     request.session = request.environ['beaker.session']
 
-os.chdir('/home/dzil123/mysite') # for static files
+def asdf(func, title='', back=True):
+    def f():
+        b = '<p><a href='/'>Back to Start</a></p>'
+        b = b if back else ''
+        html = '''<html>
+<head>
+<title>%s</title>
+</head>
+<body>
+<h1>%s</h1>
+<div>%s</div>
+%s
+</body>
+</html>''' % (title, title, func(), b)
+        
+        return html
+    return f
 
 @route('/<name>/', method='ANY')
 def slash_main(name):
